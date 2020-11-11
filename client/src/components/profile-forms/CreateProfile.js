@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 
-const CreateProfile = ({createProfile,
-	getCurrentProfile,
-	profile: { profile, loading },
-	history}) => {
+const CreateProfile = ({ createProfile,
+    getCurrentProfile,
+    profile: { profile, loading },
+    history }) => {
 
     const [formData, setFormData] = useState({
         company: '',
@@ -43,10 +43,10 @@ const CreateProfile = ({createProfile,
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-        const onSubmit = e => {
-            e.preventDefault();
-            createProfile(formData, history);
-        };
+    const onSubmit = e => {
+        e.preventDefault();
+        createProfile(formData, history);
+    };
     return (
         <Fragment>
             <h1 className="large text-primary">
@@ -57,7 +57,7 @@ const CreateProfile = ({createProfile,
         profile stand out
       </p>
             <small>* = required field</small>
-            <form className="form" onSubmit={e=>onSubmit(e)}>
+            <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
                     <select name="status" value={status} onChange={e => onChange(e)}>
                         <option value="0">* Select Professional Status</option>
@@ -186,20 +186,22 @@ const CreateProfile = ({createProfile,
                 </Fragment>}
 
                 <input type="submit" className="btn btn-primary my-1" />
-                <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+                <Link className='btn btn-light my-1' to='/dashboard'>
+                    Go Back
+        </Link>
             </form>
         </Fragment>
     )
 }
 
 CreateProfile.propTypes = {
-	createProfile: PropTypes.func.isRequired,
-	getCurrentProfile: PropTypes.func.isRequired,
-	profile: PropTypes.object.isRequired
+    createProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-	profile: state.profile
+    profile: state.profile
 });
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-	withRouter(CreateProfile)
+    withRouter(CreateProfile)
 );
